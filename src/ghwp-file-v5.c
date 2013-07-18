@@ -229,7 +229,7 @@ static void _ghwp_file_v5_parse_body_text (GHWPDocument *doc, GError **error)
         context = ghwp_context_new (section_stream);
 
         while (ghwp_context_pull(context, error)) {
-            curr_lv = (guint) context->level;
+            curr_lv = context->level;
             /* 상태 변화 */
             if (curr_lv <= ctrl_lv)
                 context->status = STATE_NORMAL;

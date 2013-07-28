@@ -51,8 +51,10 @@ GHWPFileML *ghwp_file_ml_new_from_filename (const gchar *filename,
 {
     g_return_val_if_fail (filename != NULL, NULL);
 
-    GHWPFileML *file = g_object_new (GHWP_TYPE_FILE_ML, NULL);
-    file->priv->uri  = g_filename_to_uri (filename, NULL, error);
+    GHWPFileML *file  = g_object_new (GHWP_TYPE_FILE_ML, NULL);
+    GFile      *gfile = g_file_new_for_path (filename);
+    file->priv->uri   = g_file_get_uri (gfile);
+    g_object_unref (gfile);
 
     return file;
 }

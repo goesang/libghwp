@@ -823,10 +823,13 @@ static void _ghwp_file_v5_make_stream (GHWPFileV5 *file)
 
             gint j;
             for (j = 0; j < num_children; j++) {
-                input = gsf_infile_child_by_index (infile, j);
+
+                input = gsf_infile_child_by_vname (infile,
+                                             g_strdup_printf("Section%d", j),
+                                             NULL);
+
                 GsfInfile *section = _g_object_ref0 (input);
 
-		/* FIXME: invalid order: Section1 Section0 */
                 if (gsf_infile_num_children (section) > 0) {
                     fprintf (stderr, "invalid section\n");
                 }
